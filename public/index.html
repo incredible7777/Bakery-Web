@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cake Bakery</title>
+    <link rel="shortcut icon" type="image" href="./image/logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- bootstrap links -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap links -->
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Uchen&display=swap"
+      rel="stylesheet"
+    />
+    <!-- fonts links -->
+    <!-- icons links -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- icons links -->
+    <!-- animation links -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" /> -->
+
+    <!-- animation links -->
+  </head>
+  <body>
+    <div class="all-content">
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-md" id="navbar">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#" id="logo"
+          ><img src="./image/logo.png" alt="" width="50px" />Cake Bakery</a
+        >
+
+        <!-- Toggler/collapsibe Button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span><img src="./image/menu.png" alt="" width="30px" /></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <!-- dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="navbardrop"
+                data-toggle="dropdown"
+              >
+                Category
+              </a>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">Birthday Cake</a>
+                <a href="#" class="dropdown-item">Chocolate Cake</a>
+                <a href="#" class="dropdown-item">Party Cake</a>
+                <a href="#" class="dropdown-item">Slice Cake</a>
+                <a href="#" class="dropdown-item">Cup Cake</a>
+              </div>
+            </li>
+            <!-- dropdown -->
+            <li class="nav-item">
+              <a class="nav-link" href="#">Galary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="icons">
+          <img src="./image/user.png" alt="" width="20px" data-toggle="modal" data-target="#authModal">
+          <img src="./image/heart.png" alt="" width="20px" />
+          <img src="./image/add.png" alt="" width="24px" />
+         
+        </div>
+      </nav>
+
+      <!-- login/signup -->
+      <div class="modal fade" id="authModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="authModalLabel">Login / Signup</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="login-tab"
+                    data-toggle="tab"
+                    href="#login"
+                    role="tab"
+                    aria-controls="login"
+                    aria-selected="true"
+                  >
+                    Login
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="signup-tab"
+                    data-toggle="tab"
+                    href="#signup"
+                    role="tab"
+                    aria-controls="signup"
+                    aria-selected="false"
+                  >
+                    Signup
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content" id="authTabsContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="login"
+                  role="tabpanel"
+                  aria-labelledby="login-tab"
+                >
+                  <form id="loginForm">
+                    <div class="form-group">
+                      <label for="loginEmail">Email</label>
+                      <input type="email" class="form-control" id="loginEmail" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="loginPassword">Password</label>
+                      <input type="password" class="form-control" id="loginPassword" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </form>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="signup"
+                  role="tabpanel"
+                  aria-labelledby="signup-tab"
+                >
+                  <form id="signupForm">
+                    <div class="form-group">
+                      <label for="signupEmail">Email</label>
+                      <input type="email" class="form-control" id="signupEmail" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="signupPassword">Password</label>
+                      <input type="password" class="form-control" id="signupPassword" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="signupName">Name</label>
+                      <input type="text" class="form-control" id="signupName" required />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Signup</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+      <!-- navbar end -->
+
+      <!-- home section -->
+      <div class="home">
+        <div class="content" data-aos="zoom-out-right">
+          <h3>Delicious <br />Cakes Bakery</h3>
+          <h2>Category <span class="changecontent"></span></h2>
+          <p>
+            Gently place the parchment on your cake. Using a toothpick, prick
+            the message onto the frosting. Once you remove the parchment, you
+            can connect the dots with your toothpick.
+          </p>
+          <a href="#" class="btn">Order Now</a>
+        </div>
+        <div class="img" data-aos="zoom-out-left">
+          <img src="./image/background.png" alt="" />
+        </div>
+      </div>
+      <!-- home section end -->
+
+      <!-- top cards -->
+      <div
+        class="container"
+        id="box"
+        data-aos="fade-up"
+        data-aos-duration="1500"
+      >
+        <div class="row">
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img src="./image/box1.jpg" alt="" />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img src="./image/box2.jpg" alt="" />
+            </div>
+          </div>
+          <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+              <img src="./image/box3.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- top cards end -->
+
+      <!-- banner -->
+      <div class="banner" data-aos="fade-up" data-aos-duration="1500">
+        <div class="content">
+          <h3>Delicious Cake</h3>
+          <h2>UPTO 50% OFF</h2>
+          <p>"Cake is not just a food, it's an emotion." -</p>
+          <div id="btnorder"><button>Order Now</button></div>
+        </div>
+        <div class="img">
+          <img src="./image/banner-background.png" alt="" />
+        </div>
+      </div>
+      <!-- banner end -->
+
+      <!-- product cards -->
+      <section id="product-cards" data-aos="fade-up" data-aos-duration="1500">
+        <div class="container">
+          <h1>CAKES</h1>
+          <div class="row" style="margin-top: 50px">
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c1.png" alt="" />
+                <div class="card-body">
+                  <h3>Cream Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>
+                    "Birthdays are nature's way of telling us to eat more cake."
+                  </p>
+                  <h6>
+                    RS: 1550 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px"  /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c2.png" alt="" />
+                <div class="card-body">
+                  <h3>Choco Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>"Let them eat cake." - Marie Antoinette.</p>
+                  <h6>
+                    RS: 1600 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c3.png" alt="" />
+                <div class="card-body">
+                  <h3>Slice Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>
+                    "Birthdays are nature's way of telling us to eat more cake."
+                  </p>
+                  <h6>
+                    RS: 1000 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c4.png" alt="" />
+                <div class="card-body">
+                  <h3>Fruit Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is the answer, no matter the question."</p>
+                  <h6>
+                    RS: 1230 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="margin-top: 50px"
+            data-aos="fade-up"
+            data-aos-duration="1500"
+          >
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c5.png" alt="" />
+                <div class="card-body">
+                  <h3>Brown Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>"A party without cake is just a meeting."</p>
+                  <h6>
+                    RS: 1110 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c6.png" alt="" />
+                <div class="card-body">
+                  <h3>Slice Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>"Life is uncertain. Eat dessert first."</p>
+                  <h6>
+                    RS: 1150 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c7.png" alt="" />
+                <div class="card-body">
+                  <h3>Fruit Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star"></i>
+                  </div>
+                  <p>"Cake is the language of love."</p>
+                  <h6>
+                    RS:1200 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c8.png" alt="" />
+                <div class="card-body">
+                  <h3>Choco Cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is a gift you can give yourself."</p>
+                  <h6>
+                    RS:300 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="product-cards" data-aos="fade-up" data-aos-duration="1500">
+        <div class="container">
+          <h1>BIRTHDAY CAKE</h1>
+          <div class="row" style="margin-top: 50px">
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c9.png" alt="" />
+                <div class="card-body">
+                  <h3>Birthday cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is like a warm hug, it makes everything better."</p>
+                  <h6>
+                    RS:500 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c10.png" alt="" />
+                <div class="card-body">
+                  <h3>Bir Cup cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is the ultimate comfort food."</p>
+                  <h6>
+                    RS:300 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c11.png" alt="" />
+                <div class="card-body">
+                  <h3>Birthday cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is the perfect ending to any meal."</p>
+                  <h6>
+                    RS:100 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Quick View"
+                  >
+                    <i><img src="./image/views.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Wishlist"
+                  >
+                    <i><img src="./image/heart.png" alt="" width="30px" /></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    title="Add to Cart"
+                  >
+                    <i><img src="./image/add.png" alt="" width="30px" /></i>
+                  </button>
+                </div>
+                <img src="./image/c12.png" alt="" />
+                <div class="card-body">
+                  <h3>Cup cake</h3>
+                  <div class="star">
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                    <i class="bx bxs-star checked"></i>
+                  </div>
+                  <p>"Cake is a celebration of life."</p>
+                  <h6>
+                    RS:500 <span><button>Add Cart</button></span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- product cards end-->
+
+      <!-- gallary -->
+      <section id="gallary" data-aos="fade-up" data-aos-duration="1500">
+        <div class="container">
+          <h1>OUR GALLARY</h1>
+          <div class="row" style="margin-top: 30px">
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Donuts</h3>
+                </div>
+                <img src="./image/o1.png" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Ice Cream</h3>
+                </div>
+                <img src="./image/o2.png" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Cup Cake</h3>
+                </div>
+                <img src="./image/o3.png" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="margin-top: 30px"
+            data-aos="fade-up"
+            data-aos-duration="1500"
+          >
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Delicious Cake</h3>
+                </div>
+                <img src="./image/o4.png" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Chocolate Cake</h3>
+                </div>
+                <img src="./image/o5.png" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Slice Cake</h3>
+                </div>
+                <img src="./image/o6.png" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="margin-top: 30px"
+            data-aos="fade-up"
+            data-aos-duration="1500"
+          >
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Delicious Cake</h3>
+                </div>
+                <img src="./image/menu1.jpg" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Chocolate Cake</h3>
+                </div>
+                <img src="./image/menu2.jpg" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Slice Cake</h3>
+                </div>
+                <img src="./image/menu3.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row"
+            style="margin-top: 30px"
+            data-aos="fade-up"
+            data-aos-duration="1500"
+          >
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Delicious Cake</h3>
+                </div>
+                <img src="./image/menu4.jpg" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Chocolate Cake</h3>
+                </div>
+                <img src="./image/menu5.jpg" alt="" />
+              </div>
+            </div>
+            <div class="col-md-4 py-3 py-md-0">
+              <div class="card">
+                <div class="overlay">
+                  <h3 class="text-center">Slice Cake</h3>
+                </div>
+                <img src="./image/menu6.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- gallary -->
+
+      <!-- about -->
+      <div
+        class="container"
+        id="about"
+        data-aos="fade-up"
+        data-aos-duration="1500"
+      >
+        <h1>ABOUT US</h1>
+        <div class="row">
+          <div class="col-md-6 py-3 py-md-0">
+            <div class="card">
+              <img src="./image/about.png" alt="" />
+            </div>
+          </div>
+          <div class="col-md-6 py-3 py-md-0">
+            <p>
+              How do you describe a good cake? It should be as smooth as velvet
+              without being flimsy or crumbly. A cake's texture should be smooth
+              and creamy; cakes with a grainy, gritty, grainy, lumpy, or loose
+              texture are not ideal. Cakes with savory or sweet flavors pair
+              best with a light, airy texture for a sublime gastronomic
+              experience.
+              How do you say cake is nice?
+I just wanted to say THANK YOU so much for the wonderful job you did with our wedding cake. It couldn't have been more perfect. It was so beautiful and tasted so good. It was hard to put the top in the freezer as we wanted to keep eating this delicious cake.
+            </p>
+
+            <div id="bt"><button>Read More...</button></div>
+          </div>
+        </div>
+      </div>
+      <!-- about -->
+
+      <!-- contact  -->
+      <div
+        class="container"
+        id="contact"
+        data-aos="fade-up"
+        data-aos-duration="1500"
+      >
+        <h1>CONTACT US</h1>
+        <div class="row">
+          <div class="col-md-4 py-1 py-md-0">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="usr"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-1 py-md-0">
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="eml"
+                placeholder="Email"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 py-1 py-md-0">
+            <div class="form-group">
+              <input
+                type="number"
+                class="form-control"
+                id="phn"
+                placeholder="Phone"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows="5"
+            id="comment"
+            placeholder="Message"
+          ></textarea>
+        </div>
+        <div id="messagebtn"><button>Send Message</button></div>
+      </div>
+      <!-- contact end -->
+
+      <!-- footer -->
+      <footer id="footer" data-aos="fade-up" data-aos-duration="1500">
+        <h1 class="text-center">Cake Bakery</h1>
+        <p class="text-center">
+          A cake is a type of (usually) sweet dessert which is baked. Originally, it was a bread-like food, but no longer. Cakes are often made to celebrate special occasions like birthdays or weddings. There are many kinds of cakes.
+        </p>
+        <div class="icons text-center">
+          <i class="bx bxl-twitter"></i>
+          <i class="bx bxl-facebook"></i>
+          <i class="bx bxl-google"></i>
+          <i class="bx bxl-skype"></i>
+          <i class="bx bxl-instagram"></i>
+        </div>
+        <div class="copyright text-center">
+          &copy; Copyright <strong>Cake Bakery</strong> .All Rights Reserved
+        </div>
+        <div class="credite text-center"> Designed By <a href="#"><span>Atulya</span></a>
+        </div>
+      </footer>
+      <!-- footer -->
+
+      <a href="#" class="arrow"
+        ><i><img src="./image/up-arrow.png" alt="" width="50px" /></i
+      ></a>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      // AJAX Call for Login
+      document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+    
+        fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              localStorage.setItem('userId', data.user._id);
+              localStorage.setItem('userName', data.user.name);
+              alert('Login successful!');
+              
+              window.location.href = '/'; // Redirect to homepage
+            } else {
+              alert(data.message);
+            }
+          });
+      });
+    
+      // AJAX Call for Signup
+      document.getElementById('signupForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  fetch('http://localhost:3000/signup', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, email, password }),
+})
+  .then((res) => res.json())
+  .then((data) => {
+    if (data.success) {
+      // Save user info locally
+      localStorage.setItem('userName', data.user.name);
+      localStorage.setItem('userId', data.user._id);
+      alert('Signup successful!');
+      window.location.href = '/'; // Redirect to homepage
+    } else {
+      alert(data.message);
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const userImage = document.querySelector('.icons img[src="./image/user.png"]');
+    const userName = localStorage.getItem('userName');
+    if (userName && userImage) {
+        userImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=573818&color=fff`;
+        userImage.alt = userName.charAt(0).toUpperCase(); // Accessibility
+    }
+});
+
+
+
+
+
+
+// sending messeges
+document.getElementById('messagebtn').addEventListener('click', function () {
+    const name = document.getElementById('usr').value;
+    const email = document.getElementById('eml').value;
+    const phone = document.getElementById('phn').value;
+    const message = document.getElementById('comment').value;
+
+    fetch('http://localhost:3000/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message }),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data.success) alert(data.message);
+        else alert('Failed to send the message.');
+    });
+});
+
+  // Add to Cart Button Handling
+document.querySelectorAll('button[title="Add to Cart"]').forEach((button) => {
+    button.addEventListener('click', function () {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('Please login to add items to the cart.');
+            return;
+        }
+
+        const itemName = this.closest('.card-body').querySelector('h3').innerText;
+        fetch('http://localhost:3000/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, items: [{ name: itemName }] }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                alert('Item added to cart!');
+            } else {
+                alert('Failed to add item to cart: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch((err) => console.error('Error adding to cart:', err));
+    });
+});
+
+// Redirect to Orders Page
+document.querySelector('.icons img[src="./image/add.png"]').addEventListener('click', function () {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('Please login to view your orders.');
+        return;
+    }
+    window.location.href = `/orders/${userId}`;
+});
+
+// Add item to Wishlist
+document.querySelectorAll('button[title="Add to Wishlist"]').forEach((button) => {
+    button.addEventListener('click', function () {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('Please login to add items to your wishlist.');
+            return;
+        }
+
+        const itemName = this.closest('.card-body').querySelector('h3')?.innerText || 'Unnamed Item';
+        fetch('http://localhost:3000/wishlist/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, item: { name: itemName } }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                alert('Item added to wishlist!');
+                updateWishlistCount(data.wishlist.length);
+            } else {
+                alert('Failed to add item to wishlist: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch((err) => console.error('Error adding to wishlist:', err));
+    });
+});
+
+// Update Wishlist Count Dynamically
+function updateWishlistCount(count) {
+    const heartIcon = document.querySelector('.icons img[src="./image/heart.png"]');
+    if (!heartIcon) return;
+
+    let badge = heartIcon.nextElementSibling;
+    if (!badge) {
+        badge = document.createElement('span');
+        badge.style.background = 'red';
+        badge.style.color = 'white';
+        badge.style.borderRadius = '50%';
+        badge.style.padding = '5px';
+        badge.style.fontSize = '12px';
+        badge.style.position = 'absolute';
+        badge.style.top = '-5px';
+        badge.style.right = '-10px';
+        heartIcon.parentElement.appendChild(badge);
+    }
+    badge.innerText = count;
+}
+
+// Redirect to Wishlist Page
+document.querySelector('.icons img[src="./image/heart.png"]').addEventListener('click', function () {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('Please login to view your wishlist.');
+        return;
+    }
+    window.location.href = `/wishlist/${userId}`;
+});
+
+
+
+// Dynamic Navigation After Login
+document.addEventListener('DOMContentLoaded', function () {
+  const userIcon = document.querySelector('.icons img[src="./image/user.png"]');
+  const authModal = document.getElementById('authModal');
+  const userDropdownMenu = document.createElement('div');
+  userDropdownMenu.className = 'dropdown-menu dropdown-menu-right';
+  userDropdownMenu.style.display = 'none';
+
+  // Check if user is logged in
+  function isLoggedIn() {
+    return !!localStorage.getItem('userName'); // Return true if userName exists
+  }
+
+  // Update UI based on login state
+  function updateUI() {
+    const userName = localStorage.getItem('userName');
+    if (isLoggedIn()) {
+      // Update the user icon to display the user's initial
+      userIcon.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=573818&color=fff`;
+      userIcon.alt = userName.charAt(0).toUpperCase();
+
+      // Add dropdown options
+      userDropdownMenu.innerHTML = `
+        <a class="dropdown-item" href="/profile">My Account</a>
+        <a class="dropdown-item" href="#" id="logout">Log Out</a>
+      `;
+
+      // Handle logout functionality
+      const logoutButton = userDropdownMenu.querySelector('#logout');
+      logoutButton.addEventListener('click', function () {
+        localStorage.clear(); // Clear user data
+        alert('Logged out successfully!');
+        updateUI(); // Reset UI
+      });
+    } else {
+      // Reset to default user icon
+      userIcon.src = './image/user.png';
+      userIcon.alt = 'User Icon';
+      userDropdownMenu.innerHTML = '';
+    }
+  }
+
+  // Toggle modal or dropdown on user icon click
+  userIcon.addEventListener('click', function () {
+    if (isLoggedIn()) {
+      // Toggle dropdown visibility
+      userDropdownMenu.style.display =
+        userDropdownMenu.style.display === 'block' ? 'none' : 'block';
+    } else {
+      // Show login/signup modal
+      $(authModal).modal('show');
+    }
+  });
+
+  // Append dropdown menu to the icons container
+  const iconsContainer = document.querySelector('.icons');
+  iconsContainer.appendChild(userDropdownMenu);
+
+  // Initial UI setup
+  updateUI();
+});
+
+// Login Form Submission
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = 'John Doe'; // Simulating a user name (replace with real API data)
+  localStorage.setItem('userName', name); // Save user name
+  alert('Login successful!');
+  $('#authModal').modal('hide'); // Close the modal
+  updateUI(); // Refresh UI
+});
+
+// Signup Form Submission
+document.getElementById('signupForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('signupName').value; // Get name from signup form
+  localStorage.setItem('userName', name); // Save user name
+  alert('Signup successful!');
+  $('#authModal').modal('hide'); // Close the modal
+  updateUI(); // Refresh UI
+});
+
+// Clear localStorage when the website is loaded
+window.addEventListener('load', function () {
+    localStorage.clear();
+    console.log('LocalStorage cleared. No user is logged in.');
+});
+
+
+ </script>
+    
+  </body>
+</html>

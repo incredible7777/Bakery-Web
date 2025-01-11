@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        async function fetchProfile(userId) {
+            try {
+                const response = await fetch(`/api/profile/${userId}`);
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('userName').innerText = data.user.name;
+                    document.getElementById('userEmail').innerText = data.user.email;
+                    document.getElementById('wishlist').innerHTML = data.user.wishlist
+                        .map(item => `<li>${item.name}</li>`)
+                        .join('');
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert('You are not logged in!');
+                window.location.href = '/';
+            } else {
+                fetchProfile(userId);
+            }
+        });
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+    <h1>My Account</h1>
+<p>Name: <span id="userName"></span></p>
+<p>Email: <span id="userEmail"></span></p>
+<h2>Your Options</h2>
+<ul>
+    <li><a href="/wishlist/<userId>">Wishlist</a></li>
+    <li><a href="/orders/<userId>">Orders</a></li>
+</ul>
+<button onclick="logout()">Logout</button>
+
+</html>
