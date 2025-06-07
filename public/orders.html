@@ -3,27 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>My Orders | Cake Bakery</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #fffbe9;
+        }
+        .order-card {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .order-card.selected, .order-card:hover {
+            box-shadow: 0 4px 16px rgba(87,56,24,0.18);
+            border: 2px solid #573818;
+        }
+        .order-img {
+            width: 100%;
+            max-width: 120px;
+            border-radius: 10px 0 0 10px;
+            object-fit: cover;
+        }
+        .order-status {
+            font-weight: bold;
+            color: #573818;
+        }
+        .order-items-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .order-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .buy-now-btn {
+            background: #573818;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 18px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .buy-now-btn:hover {
+            background: #8d5524;
+            color: #fff;
+        }
+        .remove-btn {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 18px;
+            margin-top: 10px;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+        .remove-btn:hover {
+            background: #a71d2a;
+            color: #fff;
+        }
+        .cake-detail-card {
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: #fff;
+            padding: 25px;
+        }
+        .cake-detail-img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        .cake-detail-title {
+            color: #573818;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .suggestion-cakes {
+            margin-top: 40px;
+        }
+        .suggestion-cakes .card {
+            margin-bottom: 20px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .quantity-btn {
+            background: #eee;
+            border: none;
+            width: 28px;
+            height: 28px;
+            font-size: 18px;
+            border-radius: 50%;
+            margin: 0 5px;
+            color: #573818;
+            font-weight: bold;
+        }
+        .quantity-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
     <script>
+        // All cakes suggestion
+        const allCakes = [
+            {
+                name: "Cream Cake",
+                description: "A delicious cream cake with soft layers and rich cream.",
+                price: "RS: 1200",
+                image: "/image/c1.png"
+            },
+            {
+                name: "Choco Cake",
+                description: "Rich chocolate cake for chocolate lovers.",
+                price: "RS: 1600",
+                image: "/image/c2.png"
+            },
+            {
+                name: "Slice Cake",
+                description: "Perfectly sliced cake for every occasion.",
+                price: "RS: 900",
+                image: "/image/c3.png"
+            },
+            {
+                name: "Fruit Cake",
+                description: "Fresh fruit cake with seasonal fruits.",
+                price: "RS: 1400",
+                image: "/image/c4.png"
+            }
+        ];
+
+        // For order display
+        const cakeImages = {};
+        const cakeDetails = {};
+        allCakes.forEach(cake => {
+            cakeImages[cake.name] = cake.image;
+            cakeDetails[cake.name] = cake;
+        });
+
+        function getCakeImage(name) {
+            return cakeImages[name] || "/image/c1.png";
+        }
+
+        function getCakeDetail(name) {
+            return cakeDetails[name] || {
+                description: "A delicious cake.",
+                price: "RS: 1000",
+                image: "/image/c1.png"
+            };
+        }
+
+        let ordersData = [];
+        let selectedCakeName = null;
+
         async function fetchOrders(userId) {
             try {
                 const response = await fetch(`/api/orders/${userId}`);
                 const data = await response.json();
+                const ordersContainer = document.getElementById('orders');
                 if (data.success) {
-                    const ordersContainer = document.getElementById('orders');
-                    ordersContainer.innerHTML = data.orders.map(order =>
-                        `<li>
-                            <strong>Order ID:</strong> ${order._id}<br>
-                            <strong>Status:</strong> ${order.status}<br>
-                            <strong>Items:</strong> ${order.items.map(item => item.name).join(', ')}
-                        </li>`).join('');
+                    ordersData = data.orders;
+                    if (data.orders.length === 0) {
+                        ordersContainer.innerHTML = `<div class="alert alert-info">You have no orders yet.</div>`;
+                        document.getElementById('cake-detail').innerHTML = '';
+                        return;
+                    }
+                    ordersContainer.innerHTML = data.orders.map((order, idx) => {
+                        // Show first item image as order image
+                        const firstItem = order.items[0] || {};
+                        const imgSrc = getCakeImage(firstItem.name);
+                        return `
+                        <div class="card order-card" data-order-idx="${idx}">
+                            <div class="row no-gutters">
+                                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                    <img src="${imgSrc}" alt="${firstItem.name || 'Cake'}" class="order-img">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="order-header">
+                                        <span>Order ID: <strong>${order._id}</strong></span>
+                                        <span class="float-right order-status">Status: ${order.status}</span>
+                                    </div>
+                                    <div class="card-body py-2">
+                                        <h5 class="card-title mb-1">Items:</h5>
+                                        <ul class="order-items-list">
+                                          ${order.items.map(item => `
+                                            <li>
+                                              <strong>${item.name}</strong>
+                                              <button class="quantity-btn" onclick="updateOrderQuantity(event, '${order._id}', '${item.name}', ${item.quantity - 1})">-</button>
+                                              <span style="color:#888;" id="order-qty-${order._id}-${item.name.replace(/\s/g,'')}">x${item.quantity || 1}</span>
+                                              <button class="quantity-btn" onclick="updateOrderQuantity(event, '${order._id}', '${item.name}', ${item.quantity + 1})">+</button>
+                                            </li>
+                                          `).join('')}
+                                        </ul>
+                                        <button class="buy-now-btn" onclick="buyNow('${order._id}')">Buy Now</button>
+                                        <button class="remove-btn" onclick="removeOrder(event, '${order._id}')">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+                    // Add click event to each order card to show cake details
+                    document.querySelectorAll('.order-card').forEach(card => {
+                        card.addEventListener('click', function(e) {
+                            // Prevent Buy Now or Remove button from triggering card click
+                            if (e.target.classList.contains('buy-now-btn') || e.target.classList.contains('remove-btn')) return;
+                            document.querySelectorAll('.order-card').forEach(c => c.classList.remove('selected'));
+                            this.classList.add('selected');
+                            const idx = this.getAttribute('data-order-idx');
+                            showCakeDetail(ordersData[idx]);
+                        });
+                    });
+                    // Show first order's first cake by default
+                    showCakeDetail(data.orders[0]);
+                    document.querySelector('.order-card').classList.add('selected');
                 } else {
-                    alert(data.message);
+                    document.getElementById('orders').innerHTML = `<div class="alert alert-danger">${data.message || 'Failed to load orders.'}</div>`;
+                    document.getElementById('cake-detail').innerHTML = '';
                 }
             } catch (error) {
-                console.error('Error fetching orders:', error);
+                document.getElementById('orders').innerHTML = `<div class="alert alert-danger">Error fetching orders.</div>`;
+                document.getElementById('cake-detail').innerHTML = '';
             }
+        }
+
+        function buyNow(orderId) {
+            alert('Thank you for your purchase! (Order ID: ' + orderId + ')');
+            // Here you can add logic to process payment or redirect to payment gateway
+        }
+
+        async function removeOrder(event, orderId) {
+            event.stopPropagation();
+            if (!confirm('Are you sure you want to remove this order?')) return;
+            try {
+                const res = await fetch(`/api/orders/${orderId}`, { method: 'DELETE' });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.success) {
+                        alert('Order removed!');
+                        // Refresh orders
+                        const userId = localStorage.getItem('userId');
+                        fetchOrders(userId);
+                        document.getElementById('cake-detail').innerHTML = '';
+                    } else {
+                        alert('Failed to remove order.');
+                    }
+                } else {
+                    alert('Failed to remove order.');
+                }
+            } catch (err) {
+                alert('Error removing order.');
+            }
+        }
+
+        function showCakeDetail(order) {
+            if (!order || !order.items || order.items.length === 0) {
+                document.getElementById('cake-detail').innerHTML = '';
+                return;
+            }
+            // Show details for the first item in the order
+            const cake = order.items[0];
+            const detail = getCakeDetail(cake.name);
+            document.getElementById('cake-detail').innerHTML = `
+                <div class="cake-detail-card row align-items-center">
+                    <div class="col-md-4 text-center">
+                        <img src="${detail.image}" alt="${cake.name}" class="cake-detail-img mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="cake-detail-title">${cake.name}</div>
+                        <div class="mb-2">${detail.price}</div>
+                        <div class="mb-3">${detail.description}</div>
+                        <button class="buy-now-btn" onclick="buyNow('${order._id}')">Buy Now</button>
+                        <button class="remove-btn" onclick="removeOrder(event, '${order._id}')">Remove</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Suggestion cakes with add to cart and quantity
+        function renderSuggestionCakes() {
+            const refDiv = document.getElementById('suggestion-cakes');
+            refDiv.innerHTML = `
+                <h3 class="mb-3" style="color:#573818;">You May Also Like</h3>
+                <div class="row">
+                    ${allCakes.map((cake, idx) => `
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-4 text-center">
+                                        <img src="${cake.image}" alt="${cake.name}" style="max-width:90px; border-radius:10px; margin:10px;">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body py-2">
+                                            <h5 class="card-title mb-1">${cake.name}</h5>
+                                            <div class="mb-1">${cake.price}</div>
+                                            <div style="font-size:0.95em;">${cake.description}</div>
+                                            <div class="quantity-controls mt-2">
+                                                <button class="quantity-btn" onclick="changeQuantity(${idx}, -1)">-</button>
+                                                <span class="quantity-value" id="qty-${idx}">1</span>
+                                                <button class="quantity-btn" onclick="changeQuantity(${idx}, 1)">+</button>
+                                            </div>
+                                            <button class="buy-now-btn mt-2" onclick="addToCart(${idx})">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Track quantities for each suggestion cake
+        const suggestionQuantities = [1, 1, 1, 1];
+
+        function changeQuantity(idx, delta) {
+            suggestionQuantities[idx] = Math.max(1, suggestionQuantities[idx] + delta);
+            document.getElementById(`qty-${idx}`).innerText = suggestionQuantities[idx];
+        }
+
+        async function addToCart(idx) {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert('Please login to add items to the cart.');
+                return;
+            }
+            const cake = allCakes[idx];
+            const quantity = suggestionQuantities[idx];
+            try {
+                const res = await fetch('/order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, items: [{ name: cake.name, quantity }] }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Item added to cart!');
+                    fetchOrders(userId); // Refresh orders to show new order
+                } else {
+                    alert('Failed to add item to cart: ' + (data.message || 'Unknown error'));
+                }
+            } catch (err) {
+                alert('Error adding to cart.');
+            }
+        }
+
+        function updateOrderQuantity(event, orderId, itemName, newQty) {
+            event.stopPropagation();
+            if (newQty < 1) return;
+            fetch(`/api/orders/${orderId}/item`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ itemName, quantity: newQty })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById(`order-qty-${orderId}-${itemName.replace(/\s/g,'')}`).innerText = 'x' + newQty;
+                    // Optionally, refresh orders:
+                    const userId = localStorage.getItem('userId');
+                    fetchOrders(userId);
+                } else {
+                    alert('Failed to update quantity');
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -33,13 +384,24 @@
                 window.location.href = '/';
             } else {
                 fetchOrders(userId);
+                renderSuggestionCakes();
             }
         });
     </script>
 </head>
 <body>
-    <h1>My Orders</h1>
-    <ul id="orders"></ul>
-    <a href="/">Back to Home</a>
+    <div class="container py-5">
+        <h1 class="mb-4" style="color:#573818;">My Orders</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="orders"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="cake-detail"></div>
+            </div>
+        </div>
+        <div class="suggestion-cakes" id="suggestion-cakes"></div>
+        <a href="/" class="btn btn-outline-secondary mt-4">Back to Home</a>
+    </div>
 </body>
 </html>

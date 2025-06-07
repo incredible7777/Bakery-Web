@@ -106,9 +106,9 @@
           </ul>
         </div>
         <div class="icons">
-          <img src="./image/user.png" alt="" width="20px" data-toggle="modal" data-target="#authModal">
-          <img src="./image/heart.png" alt="" width="20px" />
-          <img src="./image/add.png" alt="" width="24px" />
+          <img src="./image/user.png" title="user" width="20px" data-toggle="modal" data-target="#authModal">
+          <img src="./image/heart.png"  title="Add to Wishlist" width="20px" />
+          <img src="./image/add.png" title="Add to Cart " width="24px" />
          
         </div>
       </nav>
@@ -306,7 +306,7 @@
                     "Birthdays are nature's way of telling us to eat more cake."
                   </p>
                   <h6>
-                    RS: 1550 <span><button>Add Cart</button></span>
+                    RS: 1550 <span><button title="Add to Cart">Add Cart </button></span>
                   </h6>
                 </div>
               </div>
@@ -348,7 +348,7 @@
                   </div>
                   <p>"Let them eat cake." - Marie Antoinette.</p>
                   <h6>
-                    RS: 1600 <span><button>Add Cart</button></span>
+                    RS: 1600 <span><button >Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -392,7 +392,7 @@
                     "Birthdays are nature's way of telling us to eat more cake."
                   </p>
                   <h6>
-                    RS: 1000 <span><button>Add Cart</button></span>
+                    RS: 1000 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -434,7 +434,7 @@
                   </div>
                   <p>"Cake is the answer, no matter the question."</p>
                   <h6>
-                    RS: 1230 <span><button>Add Cart</button></span>
+                    RS: 1230 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -484,7 +484,7 @@
                   </div>
                   <p>"A party without cake is just a meeting."</p>
                   <h6>
-                    RS: 1110 <span><button>Add Cart</button></span>
+                    RS: 1110 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -526,7 +526,7 @@
                   </div>
                   <p>"Life is uncertain. Eat dessert first."</p>
                   <h6>
-                    RS: 1150 <span><button>Add Cart</button></span>
+                    RS: 1150 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -568,7 +568,7 @@
                   </div>
                   <p>"Cake is the language of love."</p>
                   <h6>
-                    RS:1200 <span><button>Add Cart</button></span>
+                    RS:1200 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -610,7 +610,7 @@
                   </div>
                   <p>"Cake is a gift you can give yourself."</p>
                   <h6>
-                    RS:300 <span><button>Add Cart</button></span>
+                    RS:300 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -660,7 +660,7 @@
                   </div>
                   <p>"Cake is like a warm hug, it makes everything better."</p>
                   <h6>
-                    RS:500 <span><button>Add Cart</button></span>
+                    RS:500 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -702,7 +702,7 @@
                   </div>
                   <p>"Cake is the ultimate comfort food."</p>
                   <h6>
-                    RS:300 <span><button>Add Cart</button></span>
+                    RS:300 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -744,7 +744,7 @@
                   </div>
                   <p>"Cake is the perfect ending to any meal."</p>
                   <h6>
-                    RS:100 <span><button>Add Cart</button></span>
+                    RS:100 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -786,7 +786,7 @@
                   </div>
                   <p>"Cake is a celebration of life."</p>
                   <h6>
-                    RS:500 <span><button>Add Cart</button></span>
+                    RS:500 <span><button title="Add to Cart">Add Cart</button></span>
                   </h6>
                 </div>
               </div>
@@ -1041,278 +1041,8 @@ I just wanted to say THANK YOU so much for the wonderful job you did with our we
     <script>
       AOS.init();
     </script>
-    <script>
-      // AJAX Call for Login
-      document.getElementById('loginForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-    
-        fetch('http://localhost:3000/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.success) {
-              localStorage.setItem('userId', data.user._id);
-              localStorage.setItem('userName', data.user.name);
-              alert('Login successful!');
-              
-              window.location.href = '/'; // Redirect to homepage
-            } else {
-              alert(data.message);
-            }
-          });
-      });
-    
-      // AJAX Call for Signup
-      document.getElementById('signupForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const name = document.getElementById('signupName').value;
-  const email = document.getElementById('signupEmail').value;
-  const password = document.getElementById('signupPassword').value;
+    <script src="main.js"></script>
 
-  fetch('http://localhost:3000/signup', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name, email, password }),
-})
-  .then((res) => res.json())
-  .then((data) => {
-    if (data.success) {
-      // Save user info locally
-      localStorage.setItem('userName', data.user.name);
-      localStorage.setItem('userId', data.user._id);
-      alert('Signup successful!');
-      window.location.href = '/'; // Redirect to homepage
-    } else {
-      alert(data.message);
-    }
-  });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const userImage = document.querySelector('.icons img[src="./image/user.png"]');
-    const userName = localStorage.getItem('userName');
-    if (userName && userImage) {
-        userImage.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=573818&color=fff`;
-        userImage.alt = userName.charAt(0).toUpperCase(); // Accessibility
-    }
-});
-
-
-
-
-
-
-// sending messeges
-document.getElementById('messagebtn').addEventListener('click', function () {
-    const name = document.getElementById('usr').value;
-    const email = document.getElementById('eml').value;
-    const phone = document.getElementById('phn').value;
-    const message = document.getElementById('comment').value;
-
-    fetch('http://localhost:3000/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, message }),
-    })
-    .then((res) => res.json())
-    .then((data) => {
-        if (data.success) alert(data.message);
-        else alert('Failed to send the message.');
-    });
-});
-
-  // Add to Cart Button Handling
-document.querySelectorAll('button[title="Add to Cart"]').forEach((button) => {
-    button.addEventListener('click', function () {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            alert('Please login to add items to the cart.');
-            return;
-        }
-
-        const itemName = this.closest('.card-body').querySelector('h3').innerText;
-        fetch('http://localhost:3000/order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, items: [{ name: itemName }] }),
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.success) {
-                alert('Item added to cart!');
-            } else {
-                alert('Failed to add item to cart: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch((err) => console.error('Error adding to cart:', err));
-    });
-});
-
-// Redirect to Orders Page
-document.querySelector('.icons img[src="./image/add.png"]').addEventListener('click', function () {
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-        alert('Please login to view your orders.');
-        return;
-    }
-    window.location.href = `/orders/${userId}`;
-});
-
-// Add item to Wishlist
-document.querySelectorAll('button[title="Add to Wishlist"]').forEach((button) => {
-    button.addEventListener('click', function () {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            alert('Please login to add items to your wishlist.');
-            return;
-        }
-
-        const itemName = this.closest('.card-body').querySelector('h3')?.innerText || 'Unnamed Item';
-        fetch('http://localhost:3000/wishlist/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, item: { name: itemName } }),
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.success) {
-                alert('Item added to wishlist!');
-                updateWishlistCount(data.wishlist.length);
-            } else {
-                alert('Failed to add item to wishlist: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch((err) => console.error('Error adding to wishlist:', err));
-    });
-});
-
-// Update Wishlist Count Dynamically
-function updateWishlistCount(count) {
-    const heartIcon = document.querySelector('.icons img[src="./image/heart.png"]');
-    if (!heartIcon) return;
-
-    let badge = heartIcon.nextElementSibling;
-    if (!badge) {
-        badge = document.createElement('span');
-        badge.style.background = 'red';
-        badge.style.color = 'white';
-        badge.style.borderRadius = '50%';
-        badge.style.padding = '5px';
-        badge.style.fontSize = '12px';
-        badge.style.position = 'absolute';
-        badge.style.top = '-5px';
-        badge.style.right = '-10px';
-        heartIcon.parentElement.appendChild(badge);
-    }
-    badge.innerText = count;
-}
-
-// Redirect to Wishlist Page
-document.querySelector('.icons img[src="./image/heart.png"]').addEventListener('click', function () {
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-        alert('Please login to view your wishlist.');
-        return;
-    }
-    window.location.href = `/wishlist/${userId}`;
-});
-
-
-
-// Dynamic Navigation After Login
-document.addEventListener('DOMContentLoaded', function () {
-  const userIcon = document.querySelector('.icons img[src="./image/user.png"]');
-  const authModal = document.getElementById('authModal');
-  const userDropdownMenu = document.createElement('div');
-  userDropdownMenu.className = 'dropdown-menu dropdown-menu-right';
-  userDropdownMenu.style.display = 'none';
-
-  // Check if user is logged in
-  function isLoggedIn() {
-    return !!localStorage.getItem('userName'); // Return true if userName exists
-  }
-
-  // Update UI based on login state
-  function updateUI() {
-    const userName = localStorage.getItem('userName');
-    if (isLoggedIn()) {
-      // Update the user icon to display the user's initial
-      userIcon.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=573818&color=fff`;
-      userIcon.alt = userName.charAt(0).toUpperCase();
-
-      // Add dropdown options
-      userDropdownMenu.innerHTML = `
-        <a class="dropdown-item" href="/profile">My Account</a>
-        <a class="dropdown-item" href="#" id="logout">Log Out</a>
-      `;
-
-      // Handle logout functionality
-      const logoutButton = userDropdownMenu.querySelector('#logout');
-      logoutButton.addEventListener('click', function () {
-        localStorage.clear(); // Clear user data
-        alert('Logged out successfully!');
-        updateUI(); // Reset UI
-      });
-    } else {
-      // Reset to default user icon
-      userIcon.src = './image/user.png';
-      userIcon.alt = 'User Icon';
-      userDropdownMenu.innerHTML = '';
-    }
-  }
-
-  // Toggle modal or dropdown on user icon click
-  userIcon.addEventListener('click', function () {
-    if (isLoggedIn()) {
-      // Toggle dropdown visibility
-      userDropdownMenu.style.display =
-        userDropdownMenu.style.display === 'block' ? 'none' : 'block';
-    } else {
-      // Show login/signup modal
-      $(authModal).modal('show');
-    }
-  });
-
-  // Append dropdown menu to the icons container
-  const iconsContainer = document.querySelector('.icons');
-  iconsContainer.appendChild(userDropdownMenu);
-
-  // Initial UI setup
-  updateUI();
-});
-
-// Login Form Submission
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const name = 'John Doe'; // Simulating a user name (replace with real API data)
-  localStorage.setItem('userName', name); // Save user name
-  alert('Login successful!');
-  $('#authModal').modal('hide'); // Close the modal
-  updateUI(); // Refresh UI
-});
-
-// Signup Form Submission
-document.getElementById('signupForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const name = document.getElementById('signupName').value; // Get name from signup form
-  localStorage.setItem('userName', name); // Save user name
-  alert('Signup successful!');
-  $('#authModal').modal('hide'); // Close the modal
-  updateUI(); // Refresh UI
-});
-
-// Clear localStorage when the website is loaded
-window.addEventListener('load', function () {
-    localStorage.clear();
-    console.log('LocalStorage cleared. No user is logged in.');
-});
-
-
- </script>
     
   </body>
 </html>

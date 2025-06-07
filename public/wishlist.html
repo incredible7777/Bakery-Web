@@ -3,49 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist</title>
+    <title>My Wishlist | Cake Bakery</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #fffbe9;
+        }
+        .wishlist-card {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .wishlist-card.selected, .wishlist-card:hover {
+            box-shadow: 0 4px 16px rgba(87,56,24,0.18);
+            border: 2px solid #573818;
+        }
+        .wishlist-img {
+            width: 100%;
+            max-width: 120px;
+            border-radius: 10px 0 0 10px;
+            object-fit: cover;
+        }
+        .wishlist-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .remove-btn {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 18px;
+            margin-top: 10px;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+        .remove-btn:hover {
+            background: #a71d2a;
+            color: #fff;
+        }
+        .add-cart-btn {
+            background: #573818;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 18px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .add-cart-btn:hover {
+            background: #8d5524;
+            color: #fff;
+        }
+        .cake-detail-card {
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: #fff;
+            padding: 25px;
+        }
+        .cake-detail-img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        .cake-detail-title {
+            color: #573818;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .quantity-btn {
+            background: #eee;
+            border: none;
+            width: 28px;
+            height: 28px;
+            font-size: 18px;
+            border-radius: 50%;
+            margin: 0 5px;
+            color: #573818;
+            font-weight: bold;
+        }
+        .quantity-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
     <script>
+        // All cakes reference for images/details
+        const allCakes = [
+            {
+                name: "Cream Cake",
+                description: "A delicious cream cake with soft layers and rich cream.",
+                price: 1200,
+                image: "/image/c1.png"
+            },
+            {
+                name: "Choco Cake",
+                description: "Rich chocolate cake for chocolate lovers.",
+                price: 1600,
+                image: "/image/c2.png"
+            },
+            {
+                name: "Slice Cake",
+                description: "Perfectly sliced cake for every occasion.",
+                price: 900,
+                image: "/image/c3.png"
+            },
+            {
+                name: "Fruit Cake",
+                description: "Fresh fruit cake with seasonal fruits.",
+                price: 1400,
+                image: "/image/c4.png"
+            }
+        ];
+        const cakeImages = {};
+        const cakeDetails = {};
+        allCakes.forEach(cake => {
+            cakeImages[cake.name] = cake.image;
+            cakeDetails[cake.name] = cake;
+        });
+
+        function getCakeImage(name) {
+            return cakeImages[name] || "/image/c1.png";
+        }
+        function getCakeDetail(name) {
+            return cakeDetails[name] || {
+                description: "A delicious cake.",
+                price: 1000,
+                image: "/image/c1.png"
+            };
+        }
+
+        let wishlistData = [];
+
         async function fetchWishlist(userId) {
             try {
                 const response = await fetch(`/api/wishlist/${userId}`);
                 const data = await response.json();
+                const wishlistContainer = document.getElementById('wishlist');
                 if (data.success) {
-                    const wishlistContainer = document.getElementById('wishlist');
-                    wishlistContainer.innerHTML = data.wishlist.map(item =>
-                        `<li>${item.name} 
-                            <button onclick="removeWishlistItem('${item.name}')">Remove</button>
-                        </li>`).join('');
+                    wishlistData = data.wishlist;
+                    if (wishlistData.length === 0) {
+                        wishlistContainer.innerHTML = `<div class="alert alert-info">Your wishlist is empty.</div>`;
+                        document.getElementById('cake-detail').innerHTML = '';
+                        return;
+                    }
+                    wishlistContainer.innerHTML = wishlistData.map((item, idx) => {
+                        const cake = getCakeDetail(item.name);
+                        const imgSrc = cake.image;
+                        const quantity = item.quantity || 1;
+                        const total = cake.price * quantity;
+                        return `
+                        <div class="card wishlist-card" data-wishlist-idx="${idx}">
+                            <div class="row no-gutters">
+                                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                    <img src="${imgSrc}" alt="${item.name || 'Cake'}" class="wishlist-img">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="wishlist-header">
+                                        <span><strong>${item.name}</strong></span>
+                                    </div>
+                                    <div class="card-body py-2">
+                                        <div><b>Price:</b> RS: ${cake.price}</div>
+                                        <div style="font-size:0.95em;">${cake.description}</div>
+                                        <div class="quantity-controls mt-2">
+                                            <button class="quantity-btn" onclick="changeWishlistQuantity(${idx}, -1)">-</button>
+                                            <span class="quantity-value" id="wishlist-qty-${idx}">${quantity}</span>
+                                            <button class="quantity-btn" onclick="changeWishlistQuantity(${idx}, 1)">+</button>
+                                            <span class="ml-2"><b>Total:</b> RS: <span id="wishlist-total-${idx}">${total}</span></span>
+                                        </div>
+                                        <button class="add-cart-btn mt-2" onclick="addWishlistToCart(${idx})">Add to Cart</button>
+                                        <button class="remove-btn" onclick="removeFromWishlist(event, '${item.name}')">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+                    // Add click event to each wishlist card to show cake details
+                    document.querySelectorAll('.wishlist-card').forEach(card => {
+                        card.addEventListener('click', function(e) {
+                            if (e.target.classList.contains('add-cart-btn') || e.target.classList.contains('remove-btn') || e.target.classList.contains('quantity-btn')) return;
+                            document.querySelectorAll('.wishlist-card').forEach(c => c.classList.remove('selected'));
+                            this.classList.add('selected');
+                            const idx = this.getAttribute('data-wishlist-idx');
+                            showCakeDetail(wishlistData[idx], idx);
+                        });
+                    });
+                    // Show first cake by default
+                    showCakeDetail(wishlistData[0], 0);
+                    document.querySelector('.wishlist-card').classList.add('selected');
                 } else {
-                    alert(data.message);
+                    wishlistContainer.innerHTML = `<div class="alert alert-danger">${data.message || 'Failed to load wishlist.'}</div>`;
+                    document.getElementById('cake-detail').innerHTML = '';
                 }
             } catch (error) {
-                console.error('Error fetching wishlist:', error);
+                document.getElementById('wishlist').innerHTML = `<div class="alert alert-danger">Error fetching wishlist.</div>`;
+                document.getElementById('cake-detail').innerHTML = '';
             }
         }
 
-        async function removeWishlistItem(itemName) {
+        // Quantity controls for wishlist
+        const wishlistQuantities = {};
+
+        function changeWishlistQuantity(idx, delta) {
+            const item = wishlistData[idx];
+            if (!item) return;
+            const key = item.name;
+            if (!wishlistQuantities[key]) wishlistQuantities[key] = item.quantity || 1;
+            wishlistQuantities[key] = Math.max(1, wishlistQuantities[key] + delta);
+            document.getElementById(`wishlist-qty-${idx}`).innerText = wishlistQuantities[key];
+            // Update total price
+            const cake = getCakeDetail(item.name);
+            document.getElementById(`wishlist-total-${idx}`).innerText = cake.price * wishlistQuantities[key];
+
+            // Update in database
+            const userId = localStorage.getItem('userId');
+            fetch('/wishlist/quantity', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, itemName: item.name, quantity: wishlistQuantities[key] })
+            });
+        }
+
+        async function addWishlistToCart(idx) {
             const userId = localStorage.getItem('userId');
             if (!userId) {
-                alert('You are not logged in!');
+                alert('Please login to add items to the cart.');
                 return;
             }
+            const item = wishlistData[idx];
+            const quantity = wishlistQuantities[item.name] || item.quantity || 1;
             try {
-                const response = await fetch('/wishlist/remove', {
+                const res = await fetch('/order', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId, itemName }),
+                    body: JSON.stringify({ userId, items: [{ name: item.name, quantity }] }),
                 });
-                const data = await response.json();
+                const data = await res.json();
                 if (data.success) {
-                    alert('Item removed successfully!');
-                    fetchWishlist(userId); // Refresh wishlist
+                    alert('Item added to cart!');
                 } else {
-                    alert(data.message);
+                    alert('Failed to add item to cart: ' + (data.message || 'Unknown error'));
                 }
-            } catch (error) {
-                console.error('Error removing wishlist item:', error);
+            } catch (err) {
+                alert('Error adding to cart.');
             }
+        }
+
+        async function removeFromWishlist(event, itemName) {
+            event.stopPropagation();
+            const userId = localStorage.getItem('userId');
+            if (!userId) return;
+            if (!confirm('Are you sure you want to remove this item from your wishlist?')) return;
+            try {
+                const res = await fetch('/wishlist/remove', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, itemName })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Item removed from wishlist!');
+                    fetchWishlist(userId);
+                    document.getElementById('cake-detail').innerHTML = '';
+                } else {
+                    alert('Failed to remove item.');
+                }
+            } catch (err) {
+                alert('Error removing item.');
+            }
+        }
+
+        function showCakeDetail(item, idx) {
+            if (!item) {
+                document.getElementById('cake-detail').innerHTML = '';
+                return;
+            }
+            const detail = getCakeDetail(item.name);
+            const quantity = wishlistQuantities[item.name] || item.quantity || 1;
+            document.getElementById('cake-detail').innerHTML = `
+                <div class="cake-detail-card row align-items-center">
+                    <div class="col-md-4 text-center">
+                        <img src="${detail.image}" alt="${item.name}" class="cake-detail-img mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="cake-detail-title">${item.name}</div>
+                        <div class="mb-2"><b>Price:</b> RS: ${detail.price}</div>
+                        <div class="mb-3">${detail.description}</div>
+                        <div class="quantity-controls mt-2">
+                            <button class="quantity-btn" onclick="changeWishlistQuantity(${idx}, -1)">-</button>
+                            <span class="quantity-value" id="wishlist-qty-detail">${quantity}</span>
+                            <button class="quantity-btn" onclick="changeWishlistQuantity(${idx}, 1)">+</button>
+                            <span class="ml-2"><b>Total:</b> RS: <span id="wishlist-total-detail">${detail.price * quantity}</span></span>
+                        </div>
+                        <button class="add-cart-btn mt-2" onclick="addWishlistToCart(${idx})">Add to Cart</button>
+                        <button class="remove-btn" onclick="removeFromWishlist(event, '${item.name}')">Remove</button>
+                    </div>
+                </div>
+            `;
+            // Sync detail quantity with card
+            document.getElementById('wishlist-qty-detail').innerText = quantity;
+            document.getElementById('wishlist-total-detail').innerText = detail.price * quantity;
+            const userId = localStorage.getItem('userId');
+            fetch('/wishlist/quantity', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, itemName: item.name, quantity })
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -60,8 +335,17 @@
     </script>
 </head>
 <body>
-    <h1>My Wishlist</h1>
-    <ul id="wishlist"></ul>
-    <a href="/">Back to Home</a>
+    <div class="container py-5">
+        <h1 class="mb-4" style="color:#573818;">My Wishlist</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="wishlist"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="cake-detail"></div>
+            </div>
+        </div>
+        <a href="/" class="btn btn-outline-secondary mt-4">Back to Home</a>
+    </div>
 </body>
 </html>
