@@ -15,5 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "mongoose": "^8.9.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

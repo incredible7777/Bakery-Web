@@ -473,30 +473,3 @@ html{
     background-color: #f1f1f1;
 }
   
-.modal-content {
-    background: #fff5e6;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-.modal-header {
-    background: #573818;
-    color: white;
-}
-.modal-title {
-    font-weight: bold;
-}
-.btn-success {
-    background-color: #a1620e;
-    border: none;
-    transition: background 0.3s ease;
-}
-.btn-success:hover {
-    background-color: #573818;
-    color: white;
-}
-.btn-primary {
-    background-color: #573818;
-    border: none;
-
-}
-
