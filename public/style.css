@@ -436,8 +436,8 @@
     color: white;
 }
 /* footer */
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 .arrow{
     position: fixed;
