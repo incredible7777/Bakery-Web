@@ -153,45 +153,43 @@
                 </li>
               </ul>
               <div class="tab-content" id="authTabsContent">
-                <div
-                  class="tab-pane fade show active"
-                  id="login"
-                  role="tabpanel"
-                  aria-labelledby="login-tab"
-                >
-                  <form id="loginForm">
-                    <div class="form-group">
+                <!-- Login Tab -->
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                  <form id="loginForm" class="pt-3">
+                    <div class="form-group mb-3">
                       <label for="loginEmail">Email</label>
-                      <input type="email" class="form-control" id="loginEmail" required />
+                      <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                       <label for="loginPassword">Password</label>
-                      <input type="password" class="form-control" id="loginPassword" required />
+                      <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required />
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <div class="mt-3 text-center">
+                      <small>Don't have an account? <a href="#" onclick="$('#signup-tab').tab('show')">Sign up</a></small>
+                    </div>
                   </form>
                 </div>
-                <div
-                  class="tab-pane fade"
-                  id="signup"
-                  role="tabpanel"
-                  aria-labelledby="signup-tab"
-                >
-                  <form id="signupForm">
-                    <div class="form-group">
-                      <label for="signupEmail">Email</label>
-                      <input type="email" class="form-control" id="signupEmail" required />
-                    </div>
-                    <div class="form-group">
-                      <label for="signupPassword">Password</label>
-                      <input type="password" class="form-control" id="signupPassword" required />
-                    </div>
-                    <div class="form-group">
+
+                <!-- Signup Tab -->
+                <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                  <form id="signupForm" class="pt-3">
+                    <div class="form-group mb-3">
                       <label for="signupName">Name</label>
-                      <input type="text" class="form-control" id="signupName" required />
+                      <input type="text" class="form-control" id="signupName" placeholder="Enter your name" required />
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary">Signup</button>
+                    <div class="form-group mb-3">
+                      <label for="signupEmail">Email</label>
+                      <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required />
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="signupPassword">Password</label>
+                      <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Signup</button>
+                    <div class="mt-3 text-center">
+                      <small>Already have an account? <a href="#" onclick="$('#login-tab').tab('show')">Login</a></small>
+                    </div>
                   </form>
                 </div>
               </div>

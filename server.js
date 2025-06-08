@@ -27,8 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // --------------------------
 // MongoDB Connection
 // --------------------------
-// Connects to the local MongoDB database named 'cakebakery'.
-mongoose.connect('mongodb://localhost:27017/cakebakery', {
+// Connects to MongoDB Atlas using the MONGODB_URI environment variable.
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -286,7 +286,8 @@ app.get('/orders/:userId', (req, res) => {
 // --------------------------
 // The server listens on port 3000 and logs a message when running.
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
