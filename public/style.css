@@ -472,9 +472,9 @@ html{
     background-color: #f1f1f1;
 }
 
-/* --- Enhanced Modal Login/Signup Styles --- */
+/* --- Chocolaty Cake-Themed Modal Login/Signup Styles --- */
 .modal-content {
-  background: linear-gradient(135deg, #fff7f0 0%, #ffe0ec 100%);
+  background: linear-gradient(135deg, #f8e7d2 0%, #e2b58d 100%);
   border-radius: 18px;
   box-shadow: 0 8px 32px rgba(87,56,24,0.18);
   border: none;
@@ -491,62 +491,62 @@ html{
   margin-bottom: 0;
 }
 .nav-tabs .nav-link.active {
-  background: linear-gradient(90deg, #ffb6b9 0%, #ff6f91 100%);
-  color: #fff !important;
+  background: linear-gradient(90deg, #b88953 0%, #dfcb46 100%);
+  color: #2e1700 !important;
   border-radius: 12px 12px 0 0;
   border: none;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(255,182,185,0.10);
+  box-shadow: 0 2px 8px rgba(87,56,24,0.10);
 }
 .nav-tabs .nav-link {
-  color: #ff6f91 !important;
+  color: #573818 !important;
   font-weight: 500;
   border: none;
   background: transparent;
   transition: background 0.2s, color 0.2s;
 }
 .nav-tabs .nav-link:hover {
-  background: #ffe0ec;
-  color: #573818 !important;
+  background: #e2b58d;
+  color: #2e1700 !important;
 }
 .modal-content .form-control {
   border-radius: 8px;
-  border: 1.5px solid #ffd6e0;
-  background: #fff7f0;
+  border: 1.5px solid #e2b58d;
+  background: #f8e7d2;
   color: #573818;
   font-weight: 500;
   box-shadow: none;
   transition: border-color 0.2s;
 }
 .modal-content .form-control:focus {
-  border-color: #ffb6b9;
-  box-shadow: 0 0 0 2px #ffb6b955;
+  border-color: #b88953;
+  box-shadow: 0 0 0 2px #e2b58d55;
 }
 .modal-content label {
-  color: #ff6f91;
+  color: #573818;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 .modal-content .btn-primary, .modal-content .btn {
-  background: linear-gradient(90deg, #ff6f91 0%, #ffb6b9 100%);
+  background: linear-gradient(90deg, #573818 0%, #b88953 100%);
   border: none;
   color: #fff;
   font-weight: 600;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(255,182,185,0.15);
+  box-shadow: 0 2px 8px rgba(87,56,24,0.15);
   transition: background 0.2s, box-shadow 0.2s;
 }
 .modal-content .btn-primary:hover, .modal-content .btn:hover {
-  background: linear-gradient(90deg, #ffb6b9 0%, #ff6f91 100%);
+  background: linear-gradient(90deg, #b88953 0%, #573818 100%);
   color: #fff;
-  box-shadow: 0 4px 16px rgba(255,182,185,0.18);
+  box-shadow: 0 4px 16px rgba(87,56,24,0.18);
 }
 .modal-header {
   border-bottom: none;
   background: transparent;
 }
 .modal-title {
-  color: #ff6f91;
+  color: #573818;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -558,7 +558,7 @@ html{
   margin-bottom: 1.2rem !important;
 }
 .modal-content .text-center a {
-  color: #ff6f91;
+  color: #b88953;
   text-decoration: underline;
   font-weight: 500;
   transition: color 0.2s;
